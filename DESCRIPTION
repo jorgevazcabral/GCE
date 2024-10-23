@@ -21,3 +21,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/jorgevazcabral/GCE
+BugReports: https://github.com/jorgevazcabral/GCE/issues
