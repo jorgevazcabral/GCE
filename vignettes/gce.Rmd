@@ -1,0 +1,134 @@
+---
+title: "Introduction to gce"
+author: "Jorge Cabral"
+output: rmarkdown::html_vignette
+description: |
+  An overview of the gce framework.
+vignette: >
+  %\VignetteIndexEntry{Introduction to gce}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+One of the most widely used data analysis techniques under fairly regularity conditions is univariate multiple linear regression analysis [1]. In general, it proposes to model the relation between a dependent variable and a set of independent variables by means of a suitable mathematical model in order to understand whether the independent variables predict the dependent variable and how they explain the empirical data which are modeled [2].
+In practice, however, statistical data are frequently limited and some of these conditions are usually not satisfied. Given this, regression models become ill-posed which implies that the application of traditional estimation methods, such as the Ordinary Least Squares (OLS) estimators, may lead to non-unique or highly unstable solutions, unless simplifying assumptions/procedures are imposed to generate seemingly well-posed statistical models [3].
+One of the major concerns in univariate multiple linear regression is the collinearity problem, which is one of the responsibles for inflating the variance associated with the regression coefficients estimates and, in general, to affect the signs of the estimates, as well as statistical inference [1].
+Supported by the maximum entropy principle principle, which advocates to evaluate events’ probabilities using a distribution that maximizes entropy among those that satisfy certain expectations’ constraints (uncertainty set)... The generalized maximum entropy (GME)... The GME is a suitable and flexible method, widely used in linear modelling, where no parametric assumptions are necessary,
+and a global measure of fit is available [5].
+Consider the univariate multiple linear regression model given by
+\begin{equation}
+ Y =f(X) + \epsilon = \beta_0 + \beta_1 X_{1} + \dots + \beta_K X_{K} + \epsilon.
+\end{equation}
+This model can be written in the matrix form
+\begin{equation*} \label{MLR2}
+	Y = X\beta+ \epsilon \Leftrightarrow
+	    \begin{bmatrix}
+		Y_1\\
+		Y_2\\
+		\vdots\\
+		Y_N
+	    \end{bmatrix} =
+	 \begin{bmatrix}
+		1 & X_{11} & X_{21} & \dots & X_{K1} \\
+		1 & X_{12} & X_{22} & \dots & X_{K2} \\
+		\vdots & \vdots & \dots & \vdots & \vdots \\
+		1 & X_{1N} & X_{2N} & \dots & X_{KN}
+	\end{bmatrix}
+	\begin{bmatrix}
+    \beta_0\\
+    \beta_1\\
+    \vdots\\
+    \beta_K
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    	\epsilon_1\\
+    	\epsilon_2\\
+    	\vdots\\
+    	\epsilon_N
+    \end{bmatrix},
+\end{equation*}
+\noindent where $Y$ denotes a $\left( N \times 1 \right)$ vector of noisy observations,  $N \in \mathbb{N}$, $\beta$ is a $\left((K+1)\times 1\right)$ vector of unknown parameters or coefficients, $K \in \mathbb{N}$, $X$ is a known $\left(N\times K\right)$ matrix of explanatory variables and $\epsilon$ is a $\left(N\times 1\right)$ vector of random disturbances or errors normally distributed with zero mean.
+
+## Generalized Maximum Entropy estimator
+
+Golan et al \cite{Golan1996} generalized the Maximum Entropy formalism \cite{Jaynes1957} to linear inverse problems with noise, expressed in model (\ref{MLR1}). The idea is to treat each $\beta_j$, $j\in\left\lbrace 0,\dots,K\right\rbrace $, as a discrete random variable with a compact support and $2 \leq M < \infty$ possible outcomes, and each $\epsilon_i$, $i\in\left\lbrace 1,\dots,N\right\rbrace $, as a finite and discrete random variable with $2 \leq J < \infty$ possible outcomes. Assuming that both the unknown parameters and the unknown error terms may be bounded a priori, the linear model (\ref{MLR1}) can be presented as
+\begin{equation*}
+	Y=XZp + Vw,
+	\label{Golan625}
+\end{equation*}
+where 
+\begin{equation}\label{Golan622}
+	\beta=Zp= \left[ 
+	\begin{array}{cccc}
+		z'_1   & 0      & \cdots & {0}   \\
+		0      & z'_2   & \cdots & {0}   \\
+		\vdots & \vdots & \ddots & \vdots\\
+		0      & 0      & \cdots & {z}'_K
+	\end{array}\right]
+	\left[ 
+	\begin{array}{c}
+		{p}_1 \\
+		{p}_2 \\
+		\vdots\\
+		{p}_K
+	\end{array}\right],
+\end{equation}
+with ${Z}$ a $(K \times KM)$ matrix of support values and ${p}$ a $(KM \times 1)$ vector of unknown probabilities, and
+\begin{equation}\label{Golan624}
+	\epsilon={Vw}= \left[ 
+	\begin{array}{cccc}
+		v'_1   & 0      & \cdots & {0}   \\
+		0      & v'_2   & \cdots & {0}   \\
+		\vdots & \vdots & \ddots & \vdots\\
+		0      & 0      & \cdots & v'_N
+	\end{array}\right]
+	\left[ \begin{array}{c}
+		w_1 \\
+		w_2 \\
+		\vdots\\
+		w_N
+	\end{array}\right],
+\end{equation}
+with $V$ a $(N \times NJ)$ matrix of support values and $w$ a $(NJ \times 1)$ vector of unknown probabilities.
+	For the linear regression model specified in (\ref{MLR1}), the Generalized Maximum Entropy (GME) estimator is given by
+	\begin{equation}
+		\hat{\beta}^{GME}(Z,V) = \underset{p,w}{\operatorname{argmax}}
+		\left\{-p' \ln p - w' \ln w \right\},
+		\label{Golan631}
+	\end{equation}
+	subject to the model constraint
+	\begin{equation*}
+		Y=XZp + Vw,
+	\end{equation*}
+	and the additivity constraints for $p$ and $w$, respectively,
+	\begin{equation*}
+		\begin{array}{c}
+			1_K=(I_K \otimes 1'_M)p,\\
+			1_N=(I_N \otimes 1'_J)w,
+		\end{array}
+	\end{equation*}
+where $\otimes$ represents the Kronecker product, ${1}$ is a column vector of ones with a specific dimension, ${I}$ is an identity matrix with a specific dimension and, as defined in (\ref{Golan622}) and (\ref{Golan624}), ${Z}$ and ${V}$ are the matrices of supports, and ${p}>{0}$ and ${w}>{0}$ are probability vectors to be estimated.\\
+\indent The GME estimator generates the optimal probability vectors $\widehat{{p}}$ and $\widehat{{w}}$ that can be used to form point estimates of the unknown parameters and the unknown random errors through the reparameterizations (\ref{Golan622}) and (\ref{Golan624}), respectively. Since the objective function (\ref{Golan631}) is strictly concave in the interior of the additivity constraint set, a unique solution for the GME estimator is guaranteed if the intersection of the model and the additivity constraint sets is non-empty \cite{Golan1996}.
+
+## Selecting support spaces for Generalized Maximum Entropy estimator
+
+The supports in matrices ${Z}$ and ${V}$ are defined as being closed and bounded intervals within which each parameter or error is restricted to lie, implying that researchers need to provide exogenous information (which, unfortunately, it is not always available). This is considered the main weakness of the GME estimator\cite{Caputo2008}. Golan et al \cite{Golan1996} discuss these issues in the case of minimal prior information: for the unknown parameters, the authors recommend the use of wide bounds (this is naturally subjective) for the supports in ${Z}$, without extreme risk consequences; for the unknown errors, the authors suggest the use of the three-sigma rule with a sample scale parameter \cite{Pukelsheim1994}. The number of points $M$ in the supports is less controversial and are usually used in the literature between 3 and 7 points, since there is likely no significant improvement in the estimation with more points in the supports. The three-sigma rule, considering the standard deviation of the noisy observations and $J=3$ points in the supports is usually adopted.
+
+## Examples
+
+```{r, include = TRUE}
+
+```
+
+## Acknowledgements
+
+This work was supported by Fundação para a Ciência e Tecnologia (FCT) through CIDMA and projects [https://doi.org/10.54499/UIDB/04106/2020](https://doi.org/10.54499/UIDB/04106/2020) and [https://doi.org/10.54499/UIDP/04106/2020](https://doi.org/10.54499/UIDP/04106/2020).
