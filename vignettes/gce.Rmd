@@ -148,11 +148,12 @@ library(GCE)
 library(AER)
 ```
 
-## Simulated Data
 
-### Generate Data
+### Simulated Data
 
-```{r,echo=TRUE}
+#### Generate Data
+
+```{r,echo=TRUE,eval=FALSE}
 intercept.beta = 0
 y.gen.cont.beta = c(3, 6, 9)
 cont.k = 0 #5
@@ -179,14 +180,14 @@ ex1_data <-
   )
 ```
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,eval=FALSE}
 ex1_data_coef <- c(intercept.beta,
                    rep(0,cont.k),
                    y.gen.cont.beta)
 ex1_data
 ```
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,eval=FALSE}
 (ex1_data_cor <- 
   cor(ex1_data,
       method = "pearson"))
