@@ -129,6 +129,71 @@ The supports in matrices ${Z}$ and ${V}$ are defined as being closed and bounded
 
 ```
 
+## Workshop
+
+```{r, echo=TRUE,warning=FALSE,eval=FALSE}
+#install.packages("devtools")
+library(devtools)
+#install.packages("corrplot")
+library(corrplot)
+#install.packages("MLmetrics")
+library(MLmetrics)
+#install.packages("glmnet")
+library(glmnet)
+# install_github("jorgevazcabral/GCE",
+#                build_vignettes = TRUE,
+#                build_manual = TRUE)
+library(GCE)
+#install.packages("AER")
+library(AER)
+```
+
+## Simulated Data
+
+### Generate Data
+
+```{r,echo=TRUE}
+intercept.beta = 0
+y.gen.cont.beta = c(3, 6, 9)
+cont.k = 0 #5
+condnumber = 1 #10 #100
+
+ex1_data <-
+  GCE::gdata_GCE(
+    n = 100,
+    #Number of individuals
+    cont.k = cont.k, 
+    #Number of continuous variables not used for generating y
+    y.gen.cont.k = length(y.gen.cont.beta),
+    #Number of coefficients used for generating y
+    y.gen.cont.beta = y.gen.cont.beta,
+    #Coefficients used for generating y
+    intercept.beta = intercept.beta,
+    Xgenerator.method = "svd",
+    #Method used to generate X data
+    condnumber = condnumber,
+    #Value for the condition number of the X matrix to be used when Xgenerator is "svd"
+    Xgenerator.seed = 28102024,
+    #Seed for reproducibility
+    dataframe = TRUE # If TRUE returns a data.frame else returns a list
+  )
+```
+
+```{r,echo=TRUE}
+ex1_data_coef <- c(intercept.beta,
+                   rep(0,cont.k),
+                   y.gen.cont.beta)
+ex1_data
+```
+
+```{r,echo=TRUE}
+(ex1_data_cor <- 
+  cor(ex1_data,
+      method = "pearson"))
+
+corrplot::corrplot(ex1_data_cor)
+```
+
 ## Acknowledgements
 
 This work was supported by Fundação para a Ciência e Tecnologia (FCT) through CIDMA and projects [https://doi.org/10.54499/UIDB/04106/2020](https://doi.org/10.54499/UIDB/04106/2020) and [https://doi.org/10.54499/UIDP/04106/2020](https://doi.org/10.54499/UIDP/04106/2020).
