@@ -22,7 +22,4 @@ devtools::install_github("jorgevazcabral/GCE",
                          dependencies=TRUE)
 ```
 
-
 ## Example
-
-
