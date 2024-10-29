@@ -1,13 +1,16 @@
 GCE: Generalized Cross Entropy linear models in R.
 ====
 
+<!-- badges: start -->
+<!-- badges: end -->
+
 ## Recent/release notes
 
-*
+* 
 
 ## Features
 
-*
+* 
 
 ## Installation
 
@@ -18,3 +21,8 @@ devtools::install_github("jorgevazcabral/GCE",
                          build_manual = TRUE,
                          dependencies=TRUE)
 ```
+
+
+## Example
+
+
