@@ -12,7 +12,7 @@ A \code{data.frame} containing:
   \item{X003}{A N(0,1) independent variable.}
   \item{X004}{A N(0,1) independent variable.}
   \item{X005}{A N(0,1) independent variable.}
-  \item{y}{A Dependent variable: y = 5\*X004 + 10\*X005 + error}
+  \item{y}{A Dependent variable: y = 5 * X004 + 10 * X005 + error}
 }
 }
 \usage{
