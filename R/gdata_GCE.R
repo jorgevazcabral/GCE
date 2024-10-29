@@ -9,7 +9,7 @@
 #' @param y.gen.bin.k .
 #' @param y.gen.bin.beta .
 #' @param y.gen.bin.prob .
-#' @param y.gen.cont.k Number of coefficients used for generating y. If NULL
+#' @param y.gen.cont.k Number continuous variables used for generating y. If NULL
 #' then \code{usercoeff} must be supplied.
 #' @param y.gen.cont.beta .
 #' @param y.gen.cont.mod.k .

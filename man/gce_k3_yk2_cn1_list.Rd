@@ -28,12 +28,12 @@ Simulated data, used to demonstrate the features of gce
 #     y.gen.cont.k = 2,
 #     y.gen.cont.beta = c(5, 10),
 #     intercept.beta = 0,
-#     Xgenerator = "svd",
+#     Xgenerator.method = "svd",
 #     condnumber = 1,
 #     mu = 0,
 #     sd = 1,
-#     error_dist = "normal",
-#     error_normal_mean = 0,
+#     error.dist = "normal",
+#     error.dist.mean = 0,
 #     error.dist.snr = 5,
 #     seed = 230676
 #   )
