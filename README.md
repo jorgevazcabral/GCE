@@ -1,6 +1,14 @@
 GCE: Generalized Cross Entropy linear models in R.
 ====
 
+## Recent/release notes
+
+*
+
+## Features
+
+*
+
 ## Installation
 
 * Development version from Github:
