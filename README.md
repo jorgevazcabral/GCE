@@ -23,3 +23,9 @@ devtools::install_github("jorgevazcabral/GCE",
 ```
 
 ## Example
+
+*
+
+## Citation
+
+In case you want / have to cite my package, please use `citation('GCE')` for citation information.
