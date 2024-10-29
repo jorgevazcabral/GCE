@@ -7,7 +7,7 @@ Authors@R: c(
     person("Cabral", "Jorge", email = "jorgecabral@ua.pt", role = c("aut", "cre"),
           comment = c(ORCID = "0000-0001-5721-4550"))
   )
-Description: Estimates regression coefficients using Generalized Cross Entropy (GCE).
+Description: Estimates linear regression coefficients using Generalized Cross Entropy (GCE).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
