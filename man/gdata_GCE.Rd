@@ -56,7 +56,7 @@ gdata_GCE(
 
 \item{y.gen.bin.prob}{.}
 
-\item{y.gen.cont.k}{Number of coefficients used for generating y. If NULL
+\item{y.gen.cont.k}{Number continuous variables used for generating y. If NULL
 then \code{usercoeff} must be supplied.}
 
 \item{y.gen.cont.beta}{.}
