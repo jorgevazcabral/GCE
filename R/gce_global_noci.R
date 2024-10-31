@@ -147,20 +147,18 @@ gce_global_noci <- function(formula,
         int.one <-
           glmnet::cv.glmnet(
             x = X.aux,
-            y = scale(y) ,
+            y = scale(y),
             standardize = FALSE,
             intercept = FALSE,
             alpha = 0,
-            lambda = 10^seq(log(10^(-10),base = 10),
-                            log(10^(2),base = 10),
-                            length.out = 100),
-            nfolds = 5,
+            #lambda = 10 ^ seq(-10, 2, length.out = 100),
+            nfolds = 10,
             type.measure = "default"
           )
 
         int.one <- round(int.one.factor * max(c(1,
                                           max(abs((int.one$glmnet.fit$beta))))),
-                         3)
+                         0)
         } else
       if (int.one.prior == "lm") {
 
@@ -174,16 +172,16 @@ gce_global_noci <- function(formula,
                                        abs(coef(
                                          int.one
                                        )))),
-                3)
+                0)
       } else if (int.one.prior == "msc") {
 
       max_cor_xx <- max(abs(cor(X.aux)[upper.tri(cor(X.aux))]))
       int.one <-
         round(
-          int.one.factor * max_standardized_coef(k, max_cor_xx, int.one.percentile),3)
+          int.one.factor * max_standardized_coef(k, max_cor_xx, int.one.percentile),0)
     }
       } else {
-      int.one <- round(int.one.factor * 1,3)
+      int.one <- round(int.one.factor,0)
     }
   }
 

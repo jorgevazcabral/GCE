@@ -10,7 +10,7 @@ GCE: Generalized Cross Entropy linear models in R.
 
 ## Features
 
-* 
+* Estimates linear regression coefficients using Generalized Cross Entropy (GCE).
 
 ## Installation
 
