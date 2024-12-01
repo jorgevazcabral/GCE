@@ -2,8 +2,8 @@
 #'
 #' Returns the unscaled regression coefficients
 #'
-#' @param X.scaled ...
-#' @param y.scaled ...
+#' @param X.scaled A matrix.
+#' @param y.scaled A vector.
 #' @param betas.scaled A vector of given scaled coefficients.
 #' @param intercept logical indicating if
 #'
