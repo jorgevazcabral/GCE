@@ -7,11 +7,11 @@
 gdata_GCE(
   n,
   bin.k = 0,
-  bin.prob = c(0.5, 0.3, 0.8),
+  bin.prob = NULL,
   cont.k = 5,
   y.gen.bin.k = 0,
-  y.gen.bin.beta = c(1, 2),
-  y.gen.bin.prob = c(0.1, 0.2),
+  y.gen.bin.beta = NULL,
+  y.gen.bin.prob = NULL,
   y.gen.cont.k = 5,
   y.gen.cont.beta = c(2, 4, 6, 8, 10),
   y.gen.cont.mod.k = 0,
@@ -23,15 +23,14 @@ gdata_GCE(
   y.gen.cont.sp.dif = 1,
   intercept.beta = 0,
   Xgenerator.method = "simstudy",
-  Xgenerator.seed = NULL,
   corMatrix = 100,
-  corstr = "ind",
+  rho = NULL,
+  corstr = NULL,
   condnumber = 1,
   mu = 0,
   muvect = NULL,
   sd = 1,
   sdvect = NULL,
-  rho = 0,
   error.dist = "normal",
   error.dist.mean = 0,
   error.dist.sd = 1,
@@ -44,22 +43,25 @@ gdata_GCE(
 \arguments{
 \item{n}{Number of individuals.}
 
-\item{bin.k}{Number of binary variables.}
+\item{bin.k}{Number of binary variables not used for generating y.}
 
 \item{bin.prob}{A vector of probabilities with length equal to \code{bin.k}.}
 
-\item{cont.k}{Number of continuous variables.}
+\item{cont.k}{Number of continuous variables not used for generating y.}
 
-\item{y.gen.bin.k}{.}
+\item{y.gen.bin.k}{Number of binary variables used for generating y.}
 
-\item{y.gen.bin.beta}{.}
+\item{y.gen.bin.beta}{A vector of coefficients with length equal to \code{bin.k}
+used to generate y.}
 
-\item{y.gen.bin.prob}{.}
+\item{y.gen.bin.prob}{A vector of probabilities with length equal
+to \code{y.gen.bin.k}.}
 
 \item{y.gen.cont.k}{Number continuous variables used for generating y. If NULL
 then \code{usercoeff} must be supplied.}
 
-\item{y.gen.cont.beta}{.}
+\item{y.gen.cont.beta}{A vector of coefficients with length equal to \code{cont.k}
+used to generate y.}
 
 \item{y.gen.cont.mod.k}{.}
 
@@ -75,15 +77,17 @@ then \code{usercoeff} must be supplied.}
 
 \item{y.gen.cont.sp.dif}{.}
 
-\item{intercept.beta}{.}
+\item{intercept.beta}{Value for the constant used to generate y.}
 
 \item{Xgenerator.method}{Method used to generate X data ( \code{"simstudy"}
 or \code{"svd"}).}
 
-\item{Xgenerator.seed}{A seed used when \code{Xgenerator} is \code{"svd"}.}
+\item{corMatrix}{A positive number for alphad
+(see \code{\link[clusterGeneration]{rcorrmatrix}}), NULL or a correlation
+ matrix to be used when \code{Xgenerator} is \code{"simstudy"}.}
 
-\item{corMatrix}{A value for d, NULL or a correlation matrix to be used when
-\code{Xgenerator} is \code{"simstudy"}.}
+\item{rho}{Correlation coefficient, \code{-1 <= rho <= 1}. Use when
+\code{Xgenerator} is \code{"simstudy"} and \code{corMatrix} is NULL.}
 
 \item{corstr}{correlation structure (\code{"ind"}, \code{"cs"} or
 \code{"ar1"}) (see \code{\link[simstudy]{genCorData}}) to be used when
@@ -95,16 +99,14 @@ when \code{Xgenerator} is \code{"svd"}.}
 \item{mu}{The mean of the variables. To be used when all variables have the
 same mean.}
 
-\item{muvect}{A vector of means. The length of \code{muvect} must be \code{k}.}
+\item{muvect}{A vector of means. To be used when variables have different means.
+The length of \code{muvect} must be \code{k}.}
 
 \item{sd}{Standard deviation of the variables. To be used when all variables
 have the same standard deviation.}
 
-\item{sdvect}{A vector of standard deviations. The length of \code{sdvect}
-must be \code{k}.}
-
-\item{rho}{Correlation coefficient, \code{-1 <= rho <= 1}. Use if
-\code{corMatrix} is NULL.}
+\item{sdvect}{A vector of standard deviations. To be used when variables have
+different standard deviations. The length of \code{sdvect} must be \code{k}.}
 
 \item{error.dist}{Distribution of the error. \code{"normal"} for nomal
 distribution or \code{"t"} for t-student distribution.}
@@ -115,7 +117,8 @@ distribution or \code{"t"} for t-student distribution.}
 \item{error.dist.sd}{Standard deviation value used when \code{error_dist} is
 \code{"normal"}.}
 
-\item{error.dist.snr}{.}
+\item{error.dist.snr}{Signal to noise ratio. If not \code{NULL}, the value of
+\code{error.dist.sd} will be ignored and it will be determined accordingly.}
 
 \item{error.dist.df}{Degrees of freedom used when \code{error_dist} is
 \code{"t"}.}
