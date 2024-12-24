@@ -442,7 +442,8 @@ summary.gce <- function(object,
   ans$coefficients <- cbind(
     Estimate = object$model$coefficients$res.model.coefficients,
     `LB` = LB,
-    `UB` = UB
+    `UB` = UB,
+    `NormEnt` = object$model$nepk
   )
 
   colnames(ans$coefficients) <- c(
