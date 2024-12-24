@@ -7,9 +7,9 @@
 scale_back_coef(X.scaled, y.scaled, betas.scaled, intercept = TRUE)
 }
 \arguments{
-\item{X.scaled}{...}
+\item{X.scaled}{A matrix.}
 
-\item{y.scaled}{...}
+\item{y.scaled}{A vector.}
 
 \item{betas.scaled}{A vector of given scaled coefficients.}
 
